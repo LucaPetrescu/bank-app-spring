@@ -204,8 +204,9 @@ public class BankApplicationTask3Tests {
 
     @Test
     public void bankingServiceDemoTest() {
-        BankApplication.bankingServiceDemo(banking);
+//        BankApplication.bankingServiceDemo(banking);
 
+        BankApplication.bankingServiceDemo(applicationContext);
         Client anna = banking.getClient(CLIENT_NAMES[2]);
         assertNotNull(anna, "banking should have client with name: " + CLIENT_NAMES[2]);
 

@@ -14,7 +14,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringJUnitConfig(locations = "classpath:test-clients.xml")
+@SpringJUnitConfig(locations = "classpath:application-context.xml")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class BankApplicationTask1Tests {
@@ -35,7 +35,7 @@ public class BankApplicationTask1Tests {
         try {
             BankApplication.class.getMethod("initialize", ApplicationContext.class).invoke(null, applicationContext);
         } catch (Exception e) {
-            // ignore
+//             ignore
         }
 
         // TODO you can replace code above with this when will have the method
@@ -125,8 +125,9 @@ public class BankApplicationTask1Tests {
 
     @Test
     public void bankingServiceDemoTest() {
-        BankApplication.bankingServiceDemo(banking);
+//        BankApplication.bankingServiceDemo(banking);
 
+        BankApplication.bankingServiceDemo(applicationContext);
         Client anna = banking.getClient(CLIENT_NAMES[2]);
         assertNotNull(anna, "banking should have client with name: " + CLIENT_NAMES[2]);
 

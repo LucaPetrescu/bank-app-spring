@@ -10,6 +10,8 @@ import com.luxoft.bankapp.service.BankingImpl;
 import com.luxoft.bankapp.model.Client.Gender;
 import com.luxoft.bankapp.service.storage.ClientRepository;
 import com.luxoft.bankapp.service.storage.MapClientRepository;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class BankApplication {
 
@@ -18,12 +20,16 @@ public class BankApplication {
 
     public static void main(String[] args) {
 
-        ClientRepository repository = new MapClientRepository();
-        Banking banking = initialize(repository);
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
+
+//        ClientRepository repository = new MapClientRepository();
+        Banking banking = initialize(context);
+
+//        banking.setRepository(repository);
 
         workWithExistingClients(banking);
 
-        bankingServiceDemo(banking);
+        bankingServiceDemo(context);
 
 //        bankReportsDemo(repository);
     }
@@ -42,7 +48,9 @@ public class BankApplication {
         System.out.println("Bank Credit Sum: " + reportService.getBankCreditSum());
     }
 
-    public static void bankingServiceDemo(Banking banking) {
+    public static void bankingServiceDemo(ApplicationContext context) {
+
+        Banking banking = (Banking) context.getBean("banking");
 
         System.out.println("\n=== Initialization using Banking implementation ===\n");
 
@@ -100,9 +108,10 @@ public class BankApplication {
     /*
      * Method that creates a few clients and initializes them with sample values
      */
-    public static Banking initialize(ClientRepository repository) {
+    public static Banking initialize(ApplicationContext context) {
 
-        Banking banking = new BankingImpl();
+        Banking banking = (Banking) context.getBean("banking");
+        ClientRepository repository = new MapClientRepository();
         banking.setRepository(repository);
 
         Client client_1 = new Client(CLIENT_NAMES[0], Gender.MALE);

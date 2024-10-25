@@ -133,8 +133,9 @@ public class BankApplicationTask2Tests {
         assertEquals(2, bankReport.getNumberOfBankClients());
 
         BankApplication.workWithExistingClients(banking);
-        BankApplication.bankingServiceDemo(banking);
+//        BankApplication.bankingServiceDemo(banking);
 
+        BankApplication.bankingServiceDemo(applicationContext);
         assertEquals(3, bankReport.getNumberOfBankClients());
     }
 
@@ -143,8 +144,9 @@ public class BankApplicationTask2Tests {
         assertEquals(3, bankReport.getAccountsNumber());
 
         BankApplication.workWithExistingClients(banking);
-        BankApplication.bankingServiceDemo(banking);
+//        BankApplication.bankingServiceDemo(banking);
 
+        BankApplication.bankingServiceDemo(applicationContext);
         assertEquals(5, bankReport.getAccountsNumber());
     }
 
@@ -153,8 +155,9 @@ public class BankApplicationTask2Tests {
         assertEquals(0, bankReport.getBankCreditSum());
 
         BankApplication.workWithExistingClients(banking);
-        BankApplication.bankingServiceDemo(banking);
+//        BankApplication.bankingServiceDemo(banking);
 
+        BankApplication.bankingServiceDemo(applicationContext);
         assertEquals(-500, bankReport.getBankCreditSum());
 
     }
